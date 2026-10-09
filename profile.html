@@ -18,9 +18,9 @@
 <div class="glass p-4">
 <h3 class="text-cyan-300 font-bold text-[13px] mb-3"><i class="fa-solid fa-user"></i> ACCOUNT DETAILS</h3>
 <label class="text-[10px] text-slate-400 font-bold">FULL NAME</label><input id="fname" class="field mt-1 mb-3" value="">
-<label class="text-[10px] text-slate-400 font-bold">EMAIL (login id — change করা যায় না)</label><input id="femail" class="field mt-1 mb-3" value="" disabled style="opacity:.6">
+<label class="text-[10px] text-slate-400 font-bold">EMAIL (login ID — cannot be changed)</label><input id="femail" class="field mt-1 mb-3" value="" disabled style="opacity:.6">
 <label class="text-[10px] text-slate-400 font-bold">PHONE NUMBER</label><input id="fphone" class="field mt-1 mb-3" value="">
-<label class="text-[10px] text-slate-400 font-bold">NEW PASSWORD (min 6 — খালি রাখলে change হবে না)</label><input id="fpass" type="password" class="field mt-1" placeholder="••••••••">
+<label class="text-[10px] text-slate-400 font-bold">NEW PASSWORD (min 6 — leave blank to keep current)</label><input id="fpass" type="password" class="field mt-1" placeholder="••••••••">
 <button onclick="saveProfile()" class="w-full mt-3 bg-cyan-400 text-black font-bold py-2.5 rounded-xl text-[13px]">SAVE CHANGES</button>
 <div id="pmsg" class="text-center text-[11px] mt-2"></div>
 <button onclick="doLogout()" class="w-full mt-2 text-[12px] text-red-400 py-2">Logout</button>
@@ -58,14 +58,14 @@ needAuth(async u=>{
 async function saveProfile(){
  const m=document.getElementById('pmsg');
  const name=document.getElementById('fname').value.trim(), phone=document.getElementById('fphone').value.trim(), np=document.getElementById('fpass').value;
- if(!name){m.innerHTML='<span class="text-red-400">Name দাও</span>';return}
+ if(!name){m.innerHTML='<span class="text-red-400">Enter name</span>';return}
  m.textContent='Saving…';
  try{
   await fbDB().ref('users/'+me.uid).update({name,phone,email:me.email});
   if(name!==me.displayName) await me.updateProfile({displayName:name});
   if(np){ if(np.length<6){m.innerHTML='<span class="text-red-400">Password min 6</span>';return} await me.updatePassword(np); document.getElementById('fpass').value=''; }
   document.getElementById('pname').textContent=name;
-  m.innerHTML='<span class="text-green-400">Saved ✅</span>';
+  m.innerHTML='<span class="text-green-400"><i class="fa-solid fa-circle-check"></i> Saved</span>';
  }catch(e){m.innerHTML='<span class="text-red-400">'+e.message+'</span>'}
 }
 </script></body></html>

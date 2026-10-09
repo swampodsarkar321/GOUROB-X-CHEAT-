@@ -83,13 +83,14 @@ function paintStatic(){document.querySelectorAll('.wallet-amt').forEach(e=>e.tex
 async function buyNow(){
  const pr=P.packages[selPkg].price, tot=pr*selQty;
  if(bal<tot){location.href='add-fund.html';return}
- if(!confirm(`৳${tot} দিয়ে ${selQty} key কিনবে?`))return;
+ if(!confirm(`Buy ${selQty} key(s) for ৳${tot}?`))return;
  try{
   let ok=false;
   await fbDB().ref('wallets/'+me.uid).transaction(b=>{b=parseFloat(b)||0;if(b<tot)return;ok=true;return b-tot});
-  if(!ok){alert('Balance কমে গেছে, আবার চেষ্টা করো');return}
+  if(!ok){alert('Balance changed, please try again');return}
   await fbDB().ref('orders').push({uid:me.uid,email:me.email,productId:id,product:P.name,plan:P.packages[selPkg].label,unit:pr,qty:selQty,total:tot,status:'delivered',time:Date.now()});
-  alert('✅ Purchase success! Key delivery/order history দেখো।');
+  await fbDB().ref('feed').push({product:P.name,plan:P.packages[selPkg].label,qty:selQty,time:Date.now()}).catch(()=>{});
+  alert('Purchase successful! Check your order history.');
   location.href='all-order.html';
  }catch(e){alert('Fail: '+e.message)}
 }

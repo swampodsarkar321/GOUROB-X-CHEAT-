@@ -24,7 +24,7 @@ async function doReg(){
  const name=document.getElementById('nm').value.trim(), email=document.getElementById('em').value.trim(),
        phone=document.getElementById('ph').value.trim(), pass=document.getElementById('pw').value;
  const m=document.getElementById('msg');
- if(!name||!email||!phone||!pass){m.innerHTML='<span class="text-red-400">সব ঘর পূরণ করো</span>';return}
+ if(!name||!email||!phone||!pass){m.innerHTML='<span class="text-red-400">Fill in all fields</span>';return}
  if(pass.length<6){m.innerHTML='<span class="text-red-400">Password min 6 character</span>';return}
  m.textContent='Creating…';
  try{

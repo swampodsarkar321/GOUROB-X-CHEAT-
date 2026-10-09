@@ -37,8 +37,8 @@ async function doLogin(){
 }
 async function forgot(){
  const e=document.getElementById('em').value.trim();
- if(!e) return alert('আগে email ঘরে লিখো');
- try{ await firebase.auth().sendPasswordResetEmail(e); alert('Reset link পাঠানো হয়েছে ✅'); }
+ if(!e) return alert('Enter your email first');
+ try{ await firebase.auth().sendPasswordResetEmail(e); alert('Password reset link sent!'); }
  catch(err){ alert(err.message); }
 }
 </script>

@@ -1,5 +1,6 @@
-// Firebase Realtime DB config — তোমার দেওয়া config
-// WARNING: apiKey browser-এ public থাকে, তাই Firebase Console > Realtime Database > Rules-এ admin-only write rule বসাও (নিচে sample)।
+// Firebase Realtime DB config
+// WARNING: apiKey is public in the browser, so set admin-only write rules
+// in Firebase Console > Realtime Database > Rules (see database.rules.json).
 const firebaseConfig = {
   apiKey: "AIzaSyA8JtqgrJkY67gxsps569gQjf9Mb1uecF8",
   authDomain: "stikex-aeef1.firebaseapp.com",
@@ -10,20 +11,13 @@ const firebaseConfig = {
   appId: "1:102340803215:web:7de28ed037e4ee75e24efa",
   measurementId: "G-WXQNJQ58K5"
 };
-// Init (compat SDK pages-এ load হবে)
+// Init (compat SDK loads on each page)
 try {
   if (typeof firebase !== 'undefined' && !firebase.apps.length) firebase.initializeApp(firebaseConfig);
 } catch(e){ console.warn('FB init:', e); }
 function fbDB(){ return firebase.database(); }
 function fbGet(path){ return fbDB().ref(path).once('value').then(s=>s.val()); }
 
-/* --- Realtime Database Rules sample (Console-এ paste করো) ---
-{
-  "rules": {
-    "products": { ".read": true, ".write": "auth != null" },
-    "updates":  { ".read": true, ".write": "auth != null" },
-    ".read": false, ".write": false
-  }
-}
-Admin লেখার জন্য Firebase Auth (Email login) enable করে admin.html-এ login করো।
+/* --- Realtime Database Rules: use database.rules.json (paste in Console) ---
+Admin writes require Firebase Auth (Email login) via admin.html.
 */

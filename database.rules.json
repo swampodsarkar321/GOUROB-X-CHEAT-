@@ -14,8 +14,15 @@
       ".read": true,
       ".write": "auth != null && (auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com')"
     },
-    "orders": {
-      ".read": "auth != null && (auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com')",
+    "feed": {
+      ".read": true,
+      ".indexOn": ["time"],
+      "$e": {
+        ".write": "auth != null",
+        ".validate": "newData.hasChildren(['product', 'time']) && !newData.hasChild('email') && !newData.hasChild('uid')"
+      }
+    },
+    "orders": {      ".read": "auth != null && (auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com')",
       ".indexOn": ["uid", "time"],
       "$o": {
         ".read": "auth != null && (data.child('uid').val() === auth.uid || auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com')",
