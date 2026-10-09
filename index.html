@@ -3,93 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GOUROB X CHEAT | Premium Gaming Store</title><link rel="icon" type="image/jpeg" href="IMG-20260805-WA0005.jpg">
+<title>GOUROB X CHEAT</title><link rel="icon" type="image/jpeg" href="IMG-20260805-WA0005.jpg">
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-<style>
-body{background:#04060a;color:#f8fafc;font-family:'Segoe UI',system-ui,sans-serif;
-background-image:radial-gradient(circle at 15% 15%,rgba(0,240,255,.1),transparent 40%),radial-gradient(circle at 85% 85%,rgba(121,40,202,.15),transparent 45%)}
-.glass{background:rgba(15,23,42,.75);backdrop-filter:blur(18px);border:1px solid rgba(0,240,255,.15)}
-.neon-text{background:linear-gradient(135deg,#00f0ff,#ff0080);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.card-hover{transition:.3s}.card-hover:hover{transform:translateY(-5px);border-color:rgba(0,240,255,.5);box-shadow:0 15px 35px rgba(0,240,255,.15)}
-.grid-bg{background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:35px 35px}
-</style>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<style>body{background:#04060a;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center}</style>
 </head>
-<body class="grid-bg min-h-screen">
-<!-- NAV -->
-<nav class="glass sticky top-0 z-50 px-4 py-3 flex items-center justify-between max-w-6xl mx-auto mt-3 rounded-2xl">
-<a href="index.html" class="font-extrabold text-lg tracking-widest flex items-center gap-2"><img src="IMG-20260805-WA0005.jpg" alt="GOUROB X CHEAT" class="w-9 h-9 rounded-full object-cover border border-red-500/60">GOUROB <span class="text-red-500">X</span> CHEAT</a>
-<div class="flex gap-2">
-<a href="live-orders.html" class="text-xs px-3 py-2 rounded-lg bg-white/5 border border-white/10"><i class="fa-solid fa-bolt text-yellow-400"></i> Live Orders 150+</a>
-<a href="login.html" class="text-xs font-bold px-4 py-2 rounded-lg bg-cyan-400 text-black">Login</a>
-<a href="register.html" class="text-xs font-bold px-4 py-2 rounded-lg border border-white/20">Register</a>
+<body>
+<div class="text-center">
+<img src="IMG-20260805-WA0005.jpg" alt="GOUROB X CHEAT" class="w-24 h-24 rounded-3xl object-cover border border-red-500/60 mx-auto shadow-lg">
+<h1 class="text-xl font-extrabold mt-3 tracking-widest">GOUROB <span class="text-red-500">X</span> CHEAT</h1>
+<p class="text-xs text-slate-400 mt-1">Loading…</p>
 </div>
-</nav>
-
-<!-- HERO -->
-<header class="max-w-6xl mx-auto px-4 mt-6 glass rounded-3xl p-8 text-center">
-<div class="inline-block text-[11px] font-bold tracking-[2px] text-cyan-300 border border-cyan-400/30 bg-cyan-400/10 px-4 py-1 rounded-full mb-3">● PREMIUM GAMING STORE</div>
-<h1 class="text-3xl md:text-5xl font-extrabold">Premium Products <span class="neon-text">Instant Delivery</span></h1>
-<p class="text-slate-400 text-sm mt-3">100% genuine license keys • 24/7 support • Secure checkout • Instant dispatch</p>
-<div class="flex flex-wrap justify-center gap-2 mt-5 text-xs">
-<button class="filter-btn px-4 py-2 rounded-full bg-cyan-400 text-black font-bold" data-f="all">All Products (6)</button>
-<button class="filter-btn px-4 py-2 rounded-full bg-white/5 border border-white/10" data-f="android">Android (3)</button>
-<button class="filter-btn px-4 py-2 rounded-full bg-white/5 border border-white/10" data-f="ios">iOS (2)</button>
-<button class="filter-btn px-4 py-2 rounded-full bg-white/5 border border-white/10" data-f="pc">PC (1)</button>
-</div>
-</header>
-
-<!-- PRODUCTS -->
-<main class="max-w-6xl mx-auto px-4 mt-6 pb-20">
-<div id="liveBox" class="glass rounded-2xl p-4 mb-5 text-xs text-slate-300">RECENT ORDERS: <span id="liveText" class="text-cyan-300">Syncing live sales...</span></div>
-<div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-
-<div class="glass rounded-3xl p-7 mt-8">
-<h2 class="font-bold text-lg mb-2">Platform Overview</h2>
-<p class="text-sm text-slate-400">Demo template — original design, gxspanel.shop-এর 1:1 copy নয়। এখানে dummy products ব্যবহার করা হয়েছে। নিজের logo, product, payment (bKash/Nagad/manual) বসিয়ে নিন।</p>
-<ul class="text-sm mt-3 space-y-1 text-slate-300">
-<li>✔ 24/7 support & updates</li>
-<li>✔ Secure checkout</li>
-<li>✔ Reseller rates</li>
-<li>✔ Instant key delivery (demo)</li>
-</ul>
-</div>
-</main>
-
-<footer class="max-w-6xl mx-auto px-4 pb-10 flex flex-wrap gap-3 text-xs text-slate-400">
-<a href="index.html" class="px-3 py-2 glass rounded-lg">Store</a>
-<a href="live-orders.html" class="px-3 py-2 glass rounded-lg">Live Orders</a>
-<a href="login.html" class="px-3 py-2 glass rounded-lg">Login</a>
-<a href="dashboard.html" class="px-3 py-2 glass rounded-lg">Dashboard (demo)</a>
-</footer>
-
-<a href="#" class="fixed bottom-5 right-5 w-12 h-12 rounded-full flex items-center justify-center bg-gradient-to-br from-cyan-400 to-blue-600 text-white shadow-lg"><i class="fa-brands fa-telegram text-2xl"></i></a>
-
-<script src="app.js"></script>
+<script src="firebase-config.js"></script>
 <script>
-const PRODUCTS=[
-{id:1,cat:'android',name:'Pro Panel – Android (Demo)',tag:'ANDROID',price:'৳199'},
-{id:2,cat:'android',name:'Mod Menu – Non Root (Demo)',tag:'ANDROID',price:'৳249'},
-{id:3,cat:'android',name:'VPN Secure Pack (Demo)',tag:'ANDROID',price:'৳99'},
-{id:4,cat:'ios',name:'iOS Injector Pack (Demo)',tag:'iOS',price:'৳299'},
-{id:5,cat:'ios',name:'Certificate + Sign (Demo)',tag:'iOS',price:'৳349'},
-{id:6,cat:'pc',name:'PC Tool Silent Pack (Demo)',tag:'PC',price:'৳399'},
-];
-function render(f='all'){
-const g=document.getElementById('grid');g.innerHTML='';
-PRODUCTS.filter(p=>f==='all'||p.cat===f).forEach(p=>{
-g.innerHTML+=`<div class="glass rounded-2xl p-5 card-hover">
-<div class="flex justify-between text-[10px] font-bold"><span class="px-2 py-1 rounded bg-green-500/15 text-green-400 border border-green-500/30">● ONLINE</span><span class="px-2 py-1 rounded bg-red-500/15 text-red-400 border border-red-500/30">HOT</span></div>
-<div class="h-24 my-4 rounded-xl bg-gradient-to-br from-cyan-500/20 to-pink-500/20 flex items-center justify-center text-4xl"><i class="fa-solid fa-gamepad text-cyan-300"></i></div>
-<h3 class="font-bold text-sm">${p.name}</h3>
-<p class="text-[11px] text-slate-400 mt-1">${p.tag} • Anti Ban • 24/7 Support • Instant</p>
-<div class="flex items-center justify-between mt-3"><span class="font-extrabold text-cyan-300">${p.price}</span><a href="login.html" class="text-xs font-bold px-4 py-2 rounded-lg bg-cyan-400 text-black">Purchase Key</a></div>
-</div>`})}
-render();
-document.querySelectorAll('.filter-btn').forEach(b=>b.onclick=()=>render(b.dataset.f));
-// fake live orders
-const names=['Rahim***','Sohan***','Arif***','Tanvir***','Nihad***'];
-setInterval(()=>{document.getElementById('liveText').textContent=`${names[Math.floor(Math.random()*names.length)]} just purchased • ${new Date().toLocaleTimeString()}`},3000);
+firebase.auth().onAuthStateChanged(u=>{ location.href=u?'dashboard.html':'login.html'; });
+setTimeout(()=>{ location.href='login.html'; },4000);
 </script>
 </body>
 </html>
