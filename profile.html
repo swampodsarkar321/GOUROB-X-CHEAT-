@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Profile | GOUROB X CHEAT</title><link rel="icon" type="image/jpeg" href="IMG-20260805-WA0005.jpg"><script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>body{background:#020409;color:#e8eef7}.app{max-width:430px;margin:0 auto;min-height:100vh;background:#070c1a;padding-bottom:110px}.topbar{position:sticky;top:0;z-index:50;background:rgba(7,12,26,.92);border-bottom:1px solid rgba(255,255,255,.07)}.glass{background:rgba(16,24,45,.85);border:1px solid rgba(255,255,255,.08);border-radius:16px}.wallet{background:rgba(0,255,150,.1);border:1px solid rgba(0,255,150,.35);color:#00ffa3}.field{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:10px 12px;font-size:13px;width:100%;color:#fff;outline:none}.bottomnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:rgba(8,13,28,.96);border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-around;align-items:end;padding:8px 4px 14px;z-index:60}.navitem{display:flex;flex-direction:column;align-items:center;font-size:10px;color:#8a96b0;gap:3px;min-width:52px;text-decoration:none}.navitem.active{color:#00f0ff}.store-fab{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#00c6ff,#0072ff);display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;margin-top:-28px;border:4px solid #070c1a}</style></head>
+<body><div class="app">
+<div class="topbar px-3 py-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2"><img src="IMG-20260805-WA0005.jpg" alt="GOUROB X CHEAT" class="w-9 h-9 rounded-full object-cover border border-red-500/60"><div class="text-[13px] font-extrabold tracking-wide">GOUROB <span class="text-red-500">X</span> CHEAT</div></div>
+<a href="add-fund.html" class="wallet text-[12px] font-bold px-3 py-1.5 rounded-full">৳ <span class="wallet-amt">0.00</span> +</a></div>
+<div class="px-3 mt-4 space-y-3">
+<div class="glass p-5 text-center">
+<div id="avatar" class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-cyan-500 to-blue-700 border-2 border-cyan-400 flex items-center justify-center text-2xl font-black">?</div>
+<h2 id="pname" class="font-extrabold mt-1">Loading…</h2>
+<p id="pemail" class="text-[11px] text-slate-400"></p>
+<div class="flex justify-center gap-2 mt-2 text-[11px]"><span id="puid" class="bg-green-500/15 border border-green-500/40 text-green-300 px-2.5 py-1 rounded-full"></span><span id="pjoined" class="bg-white/5 border border-white/15 px-2.5 py-1 rounded-full"></span></div>
+<div class="mt-3 bg-black/40 rounded-xl p-3 flex justify-between items-center text-[13px]"><span><i class="fa-solid fa-wallet text-green-300"></i> Balance: <b>৳ <span class="wallet-amt">0.00</span></b></span><a href="add-fund.html" class="bg-green-500/20 border border-green-500/50 text-green-300 px-3 py-1 rounded-lg text-[12px] font-bold">+ Add Fund</a></div>
+</div>
+<div class="glass p-4">
+<h3 class="text-cyan-300 font-bold text-[13px] mb-3"><i class="fa-solid fa-user"></i> ACCOUNT DETAILS</h3>
+<label class="text-[10px] text-slate-400 font-bold">FULL NAME</label><input id="fname" class="field mt-1 mb-3" value="">
+<label class="text-[10px] text-slate-400 font-bold">EMAIL (login id — change করা যায় না)</label><input id="femail" class="field mt-1 mb-3" value="" disabled style="opacity:.6">
+<label class="text-[10px] text-slate-400 font-bold">PHONE NUMBER</label><input id="fphone" class="field mt-1 mb-3" value="">
+<label class="text-[10px] text-slate-400 font-bold">NEW PASSWORD (min 6 — খালি রাখলে change হবে না)</label><input id="fpass" type="password" class="field mt-1" placeholder="••••••••">
+<button onclick="saveProfile()" class="w-full mt-3 bg-cyan-400 text-black font-bold py-2.5 rounded-xl text-[13px]">SAVE CHANGES</button>
+<div id="pmsg" class="text-center text-[11px] mt-2"></div>
+<button onclick="doLogout()" class="w-full mt-2 text-[12px] text-red-400 py-2">Logout</button>
+</div></div>
+<div class="bottomnav">
+<a href="add-fund.html" class="navitem"><i class="fa-solid fa-wallet text-[18px]"></i>Add Fund</a>
+<a href="all-order.html" class="navitem"><i class="fa-solid fa-list text-[18px]"></i>All Order</a>
+<a href="dashboard.html" class="navitem"><div class="store-fab"><i class="fa-solid fa-house"></i></div>Store</a>
+<a href="update.html" class="navitem"><i class="fa-solid fa-cloud text-[18px]"></i>Update</a>
+<a href="helpline.html" class="navitem"><i class="fa-solid fa-headset text-[18px]"></i>Helpline</a>
+<a href="profile.html" class="navitem active"><i class="fa-solid fa-user text-[18px]"></i>Profile</a>
+</div></div>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="user.js"></script>
+<script>
+let me=null, myData={};
+needAuth(async u=>{
+ me=u;
+ document.getElementById('pname').textContent=u.displayName||'User';
+ document.getElementById('avatar').textContent=(u.displayName||u.email||'?')[0].toUpperCase();
+ document.getElementById('pemail').textContent=u.email;
+ document.getElementById('femail').value=u.email;
+ document.getElementById('puid').textContent='UID: '+u.uid.slice(0,8);
+ document.getElementById('pjoined').textContent='Joined '+new Date(parseInt(u.metadata.createdAt)).toLocaleDateString();
+ try{ const s=await fbDB().ref('users/'+u.uid).once('value'); myData=s.val()||{};
+  document.getElementById('fname').value=myData.name||u.displayName||'';
+  document.getElementById('fphone').value=myData.phone||'';
+  if(myData.name) document.getElementById('pname').textContent=myData.name;
+ }catch(e){}
+ paintWallets();
+});
+async function saveProfile(){
+ const m=document.getElementById('pmsg');
+ const name=document.getElementById('fname').value.trim(), phone=document.getElementById('fphone').value.trim(), np=document.getElementById('fpass').value;
+ if(!name){m.innerHTML='<span class="text-red-400">Name দাও</span>';return}
+ m.textContent='Saving…';
+ try{
+  await fbDB().ref('users/'+me.uid).update({name,phone,email:me.email});
+  if(name!==me.displayName) await me.updateProfile({displayName:name});
+  if(np){ if(np.length<6){m.innerHTML='<span class="text-red-400">Password min 6</span>';return} await me.updatePassword(np); document.getElementById('fpass').value=''; }
+  document.getElementById('pname').textContent=name;
+  m.innerHTML='<span class="text-green-400">Saved ✅</span>';
+ }catch(e){m.innerHTML='<span class="text-red-400">'+e.message+'</span>'}
+}
+</script></body></html>

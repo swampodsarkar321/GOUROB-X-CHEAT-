@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>All Order | GOUROB X CHEAT</title><link rel="icon" type="image/jpeg" href="IMG-20260805-WA0005.jpg"><script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>body{background:#020409;color:#e8eef7}.app{max-width:430px;margin:0 auto;min-height:100vh;background:#070c1a;padding-bottom:110px}.topbar{position:sticky;top:0;z-index:50;background:rgba(7,12,26,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.07)}.glass{background:rgba(16,24,45,.85);border:1px solid rgba(255,255,255,.08)}.wallet{background:rgba(0,255,150,.1);border:1px solid rgba(0,255,150,.35);color:#00ffa3}.time{font-size:11px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#8a96b0}.time.active{border-color:#00f0ff;color:#00f0ff;background:rgba(0,240,255,.1)}.bottomnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:rgba(8,13,28,.96);border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-around;align-items:end;padding:8px 4px 14px;z-index:60}.navitem{display:flex;flex-direction:column;align-items:center;font-size:10px;color:#8a96b0;gap:3px;min-width:52px;text-decoration:none}.navitem.active{color:#00f0ff}.store-fab{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#00c6ff,#0072ff);display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;margin-top:-28px;border:4px solid #070c1a;box-shadow:0 0 20px rgba(0,180,255,.6)}</style></head>
+<body><div class="app">
+<div class="topbar px-3 py-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2"><img src="IMG-20260805-WA0005.jpg" alt="GOUROB X CHEAT" class="w-9 h-9 rounded-full object-cover border border-red-500/60"><div class="text-[13px] font-extrabold tracking-wide">GOUROB <span class="text-red-500">X</span> CHEAT</div></div>
+<a href="add-fund.html" class="wallet text-[12px] font-bold px-3 py-1.5 rounded-full">৳ <span class="wallet-amt">0.00</span> +</a></div>
+<div class="px-3 mt-4">
+<h1 class="text-center font-extrabold text-[16px]"><i class="fa-solid fa-rotate text-cyan-300"></i> Purchase History</h1>
+<div class="glass rounded-xl mt-3 px-3 py-2.5 text-[12px] flex justify-between items-center"><span><i class="fa-solid fa-filter text-cyan-300"></i> Filter by Product: <b>All Products</b></span><i class="fa-solid fa-chevron-down text-cyan-300"></i></div>
+<div class="flex gap-2 mt-3 justify-center" id="times"><button class="time" data-d="1">1 Day</button><button class="time" data-d="7">7 Days</button><button class="time" data-d="30">1 Month</button><button class="time active" data-d="0">Lifetime</button></div>
+<div id="olist" class="mt-4 space-y-2"><div class="text-center text-slate-500 text-[12px] mt-10">Loading…</div></div>
+<div id="empty" style="display:none" class="text-center mt-10 text-slate-500"><div class="mb-3"><i class="fa-solid fa-box-open text-5xl"></i></div><p class="text-[13px]">You haven't purchased anything yet.</p>
+<a href="dashboard.html" class="inline-block mt-3 text-[12px] bg-cyan-400 text-black font-bold px-5 py-2 rounded-xl">Go to Store</a></div>
+</div>
+<div class="bottomnav">
+<a href="add-fund.html" class="navitem"><i class="fa-solid fa-wallet text-[18px]"></i>Add Fund</a>
+<a href="all-order.html" class="navitem active"><i class="fa-solid fa-list text-[18px]"></i>All Order</a>
+<a href="dashboard.html" class="navitem"><div class="store-fab"><i class="fa-solid fa-house"></i></div>Store</a>
+<a href="update.html" class="navitem"><i class="fa-solid fa-cloud text-[18px]"></i>Update</a>
+<a href="helpline.html" class="navitem"><i class="fa-solid fa-headset text-[18px]"></i>Helpline</a>
+<a href="profile.html" class="navitem"><i class="fa-solid fa-user text-[18px]"></i>Profile</a>
+</div></div>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="user.js"></script>
+<script>
+let ALLO=[], days=0, me=null;
+needAuth(u=>{me=u;paintWallets();loadOrders()});
+document.querySelectorAll('#times .time').forEach(b=>b.onclick=()=>{document.querySelectorAll('#times .time').forEach(x=>x.classList.remove('active'));b.classList.add('active');days=parseInt(b.dataset.d);draw()});
+function loadOrders(){
+ fbDB().ref('orders').orderByChild('uid').equalTo(me.uid).on('value',s=>{
+  const v=s.val(); ALLO=v?Object.values(v).sort((a,b)=>b.time-a.time):[]; draw();
+ },e=>{document.getElementById('olist').innerHTML='<div class="text-center text-red-400 text-[12px] mt-10">'+e.message+'</div>'});
+}
+function draw(){
+ const list=days?ALLO.filter(o=>Date.now()-o.time<days*864e5):ALLO;
+ const box=document.getElementById('olist');
+ document.getElementById('empty').style.display=list.length?'none':'block';
+ box.innerHTML=list.map(o=>`<div class="glass rounded-xl p-3 text-[12px]">
+  <div class="flex justify-between items-center"><b>${o.product||''}</b><span class="text-green-300 text-[10px] font-bold">${o.status||''}</span></div>
+  <div class="text-slate-400 text-[11px] mt-1">${o.plan||''} × ${o.qty||1} • ৳${o.total||0} • ${o.time?new Date(o.time).toLocaleString():''}</div>
+ </div>`).join('');
+}
+</script></body></html>

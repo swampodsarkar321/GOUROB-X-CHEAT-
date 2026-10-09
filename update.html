@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Update | GOUROB X CHEAT</title><link rel="icon" type="image/jpeg" href="IMG-20260805-WA0005.jpg"><script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>body{background:#020409;color:#e8eef7}.app{max-width:430px;margin:0 auto;min-height:100vh;background:#070c1a;padding-bottom:110px}.topbar{position:sticky;top:0;z-index:50;background:rgba(7,12,26,.92);border-bottom:1px solid rgba(255,255,255,.07)}.glass{background:rgba(16,24,45,.85);border:1px solid rgba(0,240,255,.15);border-radius:16px}.wallet{background:rgba(0,255,150,.1);border:1px solid rgba(0,255,150,.35);color:#00ffa3}.btn-dl{background:linear-gradient(90deg,#0e4a6e,#155e8a);border:1px solid rgba(0,200,255,.4);border-radius:12px;font-size:12px;font-weight:800;padding:10px}.btn-setup{background:rgba(255,0,100,.12);border:1px solid rgba(255,0,100,.4);color:#ff7ab0;border-radius:12px;font-size:12px;font-weight:800;padding:10px}.bottomnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:rgba(8,13,28,.96);border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-around;align-items:end;padding:8px 4px 14px;z-index:60}.navitem{display:flex;flex-direction:column;align-items:center;font-size:10px;color:#8a96b0;gap:3px;min-width:52px;text-decoration:none}.navitem.active{color:#00f0ff}.store-fab{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#00c6ff,#0072ff);display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;margin-top:-28px;border:4px solid #070c1a;box-shadow:0 0 20px rgba(0,180,255,.6)}</style></head>
+<body><div class="app">
+<div class="topbar px-3 py-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2"><img src="IMG-20260805-WA0005.jpg" alt="GOUROB X CHEAT" class="w-9 h-9 rounded-full object-cover border border-red-500/60"><div class="text-[13px] font-extrabold tracking-wide">GOUROB <span class="text-red-500">X</span> CHEAT</div></div>
+<a href="add-fund.html" class="wallet text-[12px] font-bold px-3 py-1.5 rounded-full">৳ <span class="wallet-amt">0.00</span> +</a></div>
+<div class="px-3 mt-4 space-y-3">
+<div class="text-center"><h1 class="font-extrabold text-cyan-300 tracking-wide">UPDATE & SET UP</h1><p class="text-[11px] text-slate-400">Get the latest apps and setup guides (demo)</p></div>
+<div id="uplist" class="space-y-3"></div>
+<p class="text-[10px] text-slate-500 text-center">Demo buttons — কোনো real APK link বসানো হয়নি। নিজের legal app link বসান।</p>
+</div>
+<div class="bottomnav">
+<a href="add-fund.html" class="navitem"><i class="fa-solid fa-wallet text-[18px]"></i>Add Fund</a>
+<a href="all-order.html" class="navitem"><i class="fa-solid fa-list text-[18px]"></i>All Order</a>
+<a href="dashboard.html" class="navitem"><div class="store-fab"><i class="fa-solid fa-house"></i></div>Store</a>
+<a href="update.html" class="navitem active"><i class="fa-solid fa-cloud text-[18px]"></i>Update</a>
+<a href="helpline.html" class="navitem"><i class="fa-solid fa-headset text-[18px]"></i>Helpline</a>
+<a href="profile.html" class="navitem"><i class="fa-solid fa-user text-[18px]"></i>Profile</a>
+</div></div>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="user.js"></script>
+<script>
+needAuth(()=>{ paintWallets(); });
+document.querySelectorAll('.wallet-amt').forEach(e=>e.textContent='…');
+const fallback=[{title:'Demo Pack A – Android',note:'v1.0',link:''},{title:'Demo Pack V6',note:'v6.0',link:''}];
+function draw(list){
+ document.getElementById('uplist').innerHTML=list.map(x=>`<div class="glass p-3"><div class="flex items-center gap-2 text-[13px] font-bold"><span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center"><i class="fa-solid fa-cloud-arrow-down text-cyan-300"></i></span> ${x.title||x.n}</div>${x.note?`<div class="text-[11px] text-slate-400 mt-1">${x.note}</div>`:''}<div class="flex gap-2 mt-2">${x.link?`<a href="${x.link}" target="_blank" rel="noopener" class="btn-dl flex-1 text-center">⬇ DOWNLOAD</a>`:'<span class="btn-dl flex-1 text-center opacity-50">⬇ DOWNLOAD</span>'}<span class="btn-setup flex-1 text-center">▶ SETUP</span></div></div>`).join('');
+}
+draw(fallback);
+try{ fbDB().ref('updates').on('value',s=>{ const v=s.val(); if(v) draw(Object.values(v).reverse()); }); }catch(e){}
+</script></body></html>

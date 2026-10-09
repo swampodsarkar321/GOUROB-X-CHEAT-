@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Product | GOUROB X CHEAT</title><link rel="icon" type="image/jpeg" href="IMG-20260805-WA0005.jpg"><script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<style>body{background:#020409;color:#e8eef7}.app{max-width:430px;margin:0 auto;min-height:100vh;background:#070c1a;padding-bottom:115px}.topbar{position:sticky;top:0;z-index:50;background:rgba(7,12,26,.92);border-bottom:1px solid rgba(255,255,255,.07)}.glass{background:rgba(16,24,45,.85);border:1px solid rgba(255,255,255,.08);border-radius:16px}.wallet{background:rgba(0,255,150,.1);border:1px solid rgba(0,255,150,.35);color:#00ffa3}.pkg{padding:10px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);font-size:12px;font-weight:700;text-align:center}.pkg.active{border-color:#00f0ff;background:rgba(0,240,255,.12);color:#00f0ff}.qty{padding:8px 0;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);font-size:12px;font-weight:700;text-align:center;flex:1}.qty.active{border-color:#ff7ab0;background:rgba(255,0,100,.12);color:#ff9ac4}.feat{font-size:11px;background:rgba(0,255,150,.08);border:1px solid rgba(0,255,150,.22);color:#7dffc4;border-radius:8px;padding:6px 8px}.bottomnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:rgba(8,13,28,.96);border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-around;align-items:end;padding:8px 4px 14px;z-index:60}.navitem{display:flex;flex-direction:column;align-items:center;font-size:10px;color:#8a96b0;gap:3px;min-width:52px;text-decoration:none}.navitem.active{color:#00f0ff}.store-fab{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#00c6ff,#0072ff);display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;margin-top:-28px;border:4px solid #070c1a}</style></head>
+<body><div class="app">
+<div class="topbar px-3 py-2.5 flex items-center justify-between">
+<a href="dashboard.html" class="text-cyan-300"><i class="fa-solid fa-arrow-left text-lg"></i></a>
+<div class="text-[13px] font-extrabold text-cyan-300">PRODUCT VIEW</div>
+<a href="add-fund.html" class="wallet text-[12px] font-bold px-3 py-1.5 rounded-full">৳ <span class="wallet-amt">0.00</span> +</a></div>
+
+<div class="px-3 mt-3 space-y-3" id="wrap"><div class="glass p-8 text-center text-[12px] text-slate-400">Loading…</div></div>
+
+<div class="bottomnav">
+<a href="add-fund.html" class="navitem"><i class="fa-solid fa-wallet text-[18px]"></i>Add Fund</a>
+<a href="all-order.html" class="navitem"><i class="fa-solid fa-list text-[18px]"></i>All Order</a>
+<a href="dashboard.html" class="navitem active"><div class="store-fab"><i class="fa-solid fa-house"></i></div>Store</a>
+<a href="update.html" class="navitem"><i class="fa-solid fa-cloud text-[18px]"></i>Update</a>
+<a href="helpline.html" class="navitem"><i class="fa-solid fa-headset text-[18px]"></i>Helpline</a>
+<a href="profile.html" class="navitem"><i class="fa-solid fa-user text-[18px]"></i>Profile</a>
+</div></div>
+<script src="firebase-config.js"></script>
+<script src="user.js"></script>
+<script>
+const id=new URLSearchParams(location.search).get('id');
+let P=null, selPkg=0, selQty=1, bal=0, me=null;
+const QTYS=[1,2,3,5,10];
+needAuth(u=>{me=u;paintWallets(b=>{bal=b;calc()});load()});
+async function load(){
+ if(!id){document.getElementById('wrap').innerHTML='<div class="glass p-8 text-center text-sm">No product selected.</div>';return}
+ try{
+  const s=await fbDB().ref('products/'+id).once('value'); P=s.val();
+  if(!P){document.getElementById('wrap').innerHTML='<div class="glass p-8 text-center text-sm">Product not found / deleted.</div>';return}
+  if(!P.packages||!P.packages.length)P.packages=[{label:'Default',price:P.price||0}];
+  render();
+ }catch(e){document.getElementById('wrap').innerHTML='<div class="glass p-8 text-center text-sm">Load fail: '+e.message+'</div>'}
+}
+function render(){
+ const on=(P.status||'online')==='online';
+ document.getElementById('wrap').innerHTML=`
+ <div class="glass p-4 text-center">
+  ${P.image?`<img src="${P.image}" alt="${P.name||''}" class="w-40 h-40 mx-auto rounded-2xl object-cover border border-cyan-400/50 shadow-lg mb-3" onerror="this.remove()">`:''}
+  <span class="text-[10px] font-bold px-2.5 py-1 rounded-full ${on?'bg-green-500/15 text-green-300 border border-green-500/40':'bg-slate-500/15 text-slate-400 border border-white/20'}">${on?'● ONLINE':'OFFLINE'}</span>
+  <h1 class="font-black text-lg mt-2">${P.name}</h1>
+  ${P.note?`<div class="text-[11px] text-yellow-200 font-bold">${P.note}</div>`:''}
+  <div class="text-[11px] text-slate-400 mt-1"><i class="fa-solid fa-bolt text-green-300"></i> Instant Key Dispatch • <i class="fa-solid fa-headset"></i> 24/7 Support</div>
+ </div>
+ ${P.features&&P.features.length?`<div class="glass p-4"><h3 class="text-[12px] font-bold mb-2"><i class="fa-solid fa-list-check text-cyan-300"></i> Description & Features</h3><div class="flex flex-wrap gap-1.5">${P.features.map(f=>`<span class="feat"><i class="fa-solid fa-check"></i> ${f}</span>`).join('')}</div></div>`:''}
+ <div class="glass p-4"><h3 class="text-[12px] font-bold mb-2"><i class="fa-solid fa-box-open text-cyan-300"></i> Select Package</h3>
+  <div class="grid grid-cols-3 gap-2" id="pkgGrid">${P.packages.map((x,i)=>`<button class="pkg ${i===selPkg?'active':''}" onclick="pickPkg(${i})">${x.label}<br><span class="text-cyan-300">৳ ${x.price}</span></button>`).join('')}</div></div>
+ <div class="glass p-4"><h3 class="text-[12px] font-bold mb-1">Select Quantity</h3>
+  <p class="text-[11px] text-slate-400">Unit: ৳ <span id="unit">0</span></p>
+  <div class="flex gap-2 mt-2" id="qtyRow">${QTYS.map(q=>`<button class="qty ${q===selQty?'active':''}" onclick="pickQty(${q})">${q} Key${q>1?'s':''}</button>`).join('')}</div></div>
+ <div class="glass p-4 text-[13px] space-y-1">
+  <div class="flex justify-between"><span class="text-slate-400">Selected Plan:</span><b id="sPlan"></b></div>
+  <div class="flex justify-between"><span class="text-slate-400">Unit Price:</span><b id="sUnit"></b></div>
+  <div class="flex justify-between"><span class="text-slate-400">Quantity:</span><b id="sQty"></b></div>
+  <div class="flex justify-between"><span class="text-slate-400">Subtotal:</span><b id="sSub"></b></div>
+  <div class="flex justify-between text-[15px]"><span class="font-bold">Total Amount:</span><b class="text-cyan-300" id="sTot"></b></div>
+  <div class="flex justify-between"><span class="text-slate-400">Your Balance:</span><b>৳ <span class="wallet-amt">0.00</span></b></div>
+  <div id="buyMsg" class="text-center text-[12px]"></div>
+  <button id="buyBtn" onclick="buyNow()" class="w-full mt-2 py-3.5 rounded-2xl font-extrabold bg-gradient-to-r from-cyan-400 to-blue-600 text-black"><i class="fa-solid fa-cart-shopping"></i> PURCHASE NOW</button>
+  <a href="add-fund.html" class="block text-center text-[12px] text-green-300 mt-2">Insufficient? Add Fund →</a>
+ </div>`;
+ paintWallets(b=>{bal=b;calc()}); calc();
+}
+function pickPkg(i){selPkg=i;render()}
+function pickQty(q){selQty=q;render()}
+function calc(){
+ const u=document.getElementById('unit'); if(!u||!P)return;
+ const pr=P.packages[selPkg].price, tot=pr*selQty;
+ u.textContent=pr;
+ sPlan.textContent=P.packages[selPkg].label; sUnit.textContent='৳ '+pr; sQty.textContent=selQty+' Key(s)'; sSub.textContent='৳ '+tot; sTot.textContent='৳ '+tot;
+ const ok=bal>=tot, btn=document.getElementById('buyBtn');
+ btn.style.opacity=ok?'1':'.55';
+ document.getElementById('buyMsg').innerHTML=ok?'':'<span class="text-red-400">Insufficient Balance — Add Fund</span>';
+ paintStatic();
+}
+function paintStatic(){document.querySelectorAll('.wallet-amt').forEach(e=>e.textContent=bal.toFixed(2))}
+async function buyNow(){
+ const pr=P.packages[selPkg].price, tot=pr*selQty;
+ if(bal<tot){location.href='add-fund.html';return}
+ if(!confirm(`৳${tot} দিয়ে ${selQty} key কিনবে?`))return;
+ try{
+  let ok=false;
+  await fbDB().ref('wallets/'+me.uid).transaction(b=>{b=parseFloat(b)||0;if(b<tot)return;ok=true;return b-tot});
+  if(!ok){alert('Balance কমে গেছে, আবার চেষ্টা করো');return}
+  await fbDB().ref('orders').push({uid:me.uid,email:me.email,productId:id,product:P.name,plan:P.packages[selPkg].label,unit:pr,qty:selQty,total:tot,status:'delivered',time:Date.now()});
+  alert('✅ Purchase success! Key delivery/order history দেখো।');
+  location.href='all-order.html';
+ }catch(e){alert('Fail: '+e.message)}
+}
+</script></body></html>

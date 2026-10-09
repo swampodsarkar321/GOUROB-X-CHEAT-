@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Login | GOUROB X CHEAT</title><link rel="icon" type="image/jpeg" href="IMG-20260805-WA0005.jpg">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>body{background:#04060a;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;background-image:radial-gradient(circle at 15% 15%,rgba(0,240,255,.12),transparent 40%),radial-gradient(circle at 85% 85%,rgba(255,0,128,.12),transparent 45%)}.card{background:rgba(15,23,42,.8);backdrop-filter:blur(20px);border:1px solid rgba(0,240,255,.2);border-radius:24px}.inp{width:100%;background:#080d1a;border:1.5px solid rgba(255,255,255,.1);border-radius:12px;padding:13px 14px 13px 44px;color:#fff;outline:none}.inp:focus{border-color:#00f0ff;box-shadow:0 0 0 4px rgba(0,240,255,.12)}</style>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</head>
+<body class="p-4">
+<div class="w-full max-w-[420px]">
+<div class="card p-8">
+<div class="text-center mb-6"><div class="inline-block text-[11px] font-bold tracking-[2px] text-cyan-300 border border-cyan-400/30 px-4 py-1 rounded-full">● ULTRA SECURED ACCESS</div>
+<img src="IMG-20260805-WA0005.jpg" alt="GOUROB X CHEAT" class="w-20 h-20 rounded-2xl object-cover border border-red-500/60 mx-auto shadow-lg">
+<h1 class="text-2xl font-extrabold mt-3 tracking-widest">GOUROB <span class="text-red-500">X</span> CHEAT</h1>
+<p class="text-slate-400 text-sm">Welcome back! Login with your email.</p></div>
+<label class="text-[11px] font-bold text-slate-400">EMAIL</label>
+<div class="relative mt-1 mb-4"><i class="fa-solid fa-envelope absolute left-4 top-4 text-slate-500"></i><input id="em" type="email" class="inp" placeholder="you@mail.com"></div>
+<label class="text-[11px] font-bold text-slate-400">PASSWORD</label>
+<div class="relative mt-1"><i class="fa-solid fa-lock absolute left-4 top-4 text-slate-500"></i><input id="pwd" type="password" class="inp" placeholder="••••••••"><button onclick="const i=document.getElementById('pwd');i.type=i.type==='password'?'text':'password'" class="absolute right-3 top-3 text-slate-500"><i class="fa-regular fa-eye"></i></button></div>
+<button onclick="doLogin()" class="w-full mt-5 py-3 rounded-xl font-extrabold bg-gradient-to-r from-cyan-400 to-blue-600 text-black">LOGIN NOW <i class="fa-solid fa-arrow-right"></i></button>
+<div class="text-center text-xs mt-3"><a href="#" onclick="forgot();return false" class="text-slate-400">Forgot password?</a></div>
+<div id="msg" class="text-center text-xs mt-2"></div>
+<p class="text-center text-sm text-slate-400 mt-5">No account? <a href="register.html" class="text-cyan-300 font-bold">Register</a></p>
+<a href="index.html" class="block text-center text-xs text-slate-500 mt-3">← Back to Home</a>
+</div></div>
+<script src="firebase-config.js"></script>
+<script>
+firebase.auth().onAuthStateChanged(u=>{ if(u) location.href='dashboard.html'; });
+async function doLogin(){
+ const m=document.getElementById('msg'); m.textContent='Checking…';
+ try{ await firebase.auth().signInWithEmailAndPassword(document.getElementById('em').value.trim(),document.getElementById('pwd').value); location.href='dashboard.html'; }
+ catch(e){ m.innerHTML='<span class="text-red-400">'+e.message+'</span>'; }
+}
+async function forgot(){
+ const e=document.getElementById('em').value.trim();
+ if(!e) return alert('আগে email ঘরে লিখো');
+ try{ await firebase.auth().sendPasswordResetEmail(e); alert('Reset link পাঠানো হয়েছে ✅'); }
+ catch(err){ alert(err.message); }
+}
+</script>
+</body>
+</html>

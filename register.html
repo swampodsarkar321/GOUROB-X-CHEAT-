@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Register | GOUROB X CHEAT</title><link rel="icon" type="image/jpeg" href="IMG-20260805-WA0005.jpg"><script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</head>
+<body style="background:#04060a;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center">
+<div style="background:rgba(15,23,42,.85);border:1px solid rgba(0,240,255,.2);border-radius:20px;padding:32px;width:100%;max-width:400px;margin:16px">
+<h1 class="text-xl font-extrabold text-center">Create Account</h1>
+<p class="text-xs text-slate-400 text-center mb-4">Real account — email + password</p>
+<input id="nm" placeholder="Full name" class="w-full mb-3 p-3 rounded-lg bg-black/40 border border-white/10 text-white">
+<input id="em" type="email" placeholder="Email" class="w-full mb-3 p-3 rounded-lg bg-black/40 border border-white/10 text-white">
+<input id="ph" placeholder="Phone number" class="w-full mb-3 p-3 rounded-lg bg-black/40 border border-white/10 text-white">
+<input id="pw" type="password" placeholder="Password (min 6)" class="w-full mb-3 p-3 rounded-lg bg-black/40 border border-white/10 text-white">
+<button onclick="doReg()" class="w-full py-3 rounded-lg bg-cyan-400 text-black font-bold">REGISTER</button>
+<div id="msg" class="text-center text-xs mt-2"></div>
+<a href="login.html" class="block text-center text-xs mt-3 text-cyan-300">Already have account? Login</a>
+</div>
+<script src="firebase-config.js"></script>
+<script>
+async function doReg(){
+ const name=document.getElementById('nm').value.trim(), email=document.getElementById('em').value.trim(),
+       phone=document.getElementById('ph').value.trim(), pass=document.getElementById('pw').value;
+ const m=document.getElementById('msg');
+ if(!name||!email||!phone||!pass){m.innerHTML='<span class="text-red-400">সব ঘর পূরণ করো</span>';return}
+ if(pass.length<6){m.innerHTML='<span class="text-red-400">Password min 6 character</span>';return}
+ m.textContent='Creating…';
+ try{
+  const c=await firebase.auth().createUserWithEmailAndPassword(email,pass);
+  await c.user.updateProfile({displayName:name});
+  await fbDB().ref('users/'+c.user.uid).set({name,email,phone,created:Date.now()});
+  await fbDB().ref('wallets/'+c.user.uid).set(0).catch(()=>{});
+  location.href='dashboard.html';
+ }catch(e){m.innerHTML='<span class="text-red-400">'+e.message+'</span>'}
+}
+</script></body></html>

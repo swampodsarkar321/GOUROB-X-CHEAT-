@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Support | GOUROB X CHEAT</title><link rel="icon" type="image/jpeg" href="IMG-20260805-WA0005.jpg"><script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>body{background:#020409;color:#e8eef7}.app{max-width:430px;margin:0 auto;min-height:100vh;background:#070c1a;padding-bottom:110px}.topbar{position:sticky;top:0;z-index:50;background:rgba(7,12,26,.92);border-bottom:1px solid rgba(255,255,255,.07)}.card{background:rgba(12,19,38,.9);border:1px solid rgba(0,240,255,.2);border-top:3px solid #00f0ff;border-radius:20px}.row{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px}.wallet{background:rgba(0,255,150,.1);border:1px solid rgba(0,255,150,.35);color:#00ffa3}.bottomnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:rgba(8,13,28,.96);border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-around;align-items:end;padding:8px 4px 14px;z-index:60}.navitem{display:flex;flex-direction:column;align-items:center;font-size:10px;color:#8a96b0;gap:3px;min-width:52px;text-decoration:none}.navitem.active{color:#00f0ff}.store-fab{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#00c6ff,#0072ff);display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;margin-top:-28px;border:4px solid #070c1a}</style></head>
+<body><div class="app">
+<div class="topbar px-3 py-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2"><img src="IMG-20260805-WA0005.jpg" alt="GOUROB X CHEAT" class="w-9 h-9 rounded-full object-cover border border-red-500/60"><div class="text-[13px] font-extrabold tracking-wide">GOUROB <span class="text-red-500">X</span> CHEAT</div></div>
+<a href="add-fund.html" class="wallet text-[12px] font-bold px-3 py-1.5 rounded-full">৳ <span class="wallet-amt">0.00</span> +</a></div>
+<div class="px-4 mt-4"><div class="card p-6 text-center">
+<div class="w-16 h-16 mx-auto rounded-full border-2 border-cyan-400 flex items-center justify-center"><i class="fa-solid fa-headset text-3xl text-cyan-300"></i><span class="w-2.5 h-2.5 bg-green-400 rounded-full absolute ml-10 mt-8"></span></div>
+<h1 class="font-extrabold text-cyan-300 tracking-widest mt-3">SUPPORT CENTER</h1>
+<p class="text-[11px] text-slate-400">Contact our team for 24/7 premium help</p>
+<div class="space-y-2.5 mt-5 text-left">
+<a href="#" class="row p-3 flex items-center gap-3"><span class="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center"><i class="fa-solid fa-crown text-yellow-400"></i></span><span class="flex-1"><span class="block text-[10px] text-yellow-400 font-bold">OFFICIAL ADMIN</span><b class="text-[13px]">Contact Admin</b></span><span>›</span></a>
+<a href="#" class="row p-3 flex items-center gap-3"><span class="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center"><i class="fa-solid fa-users text-green-300"></i></span><span class="flex-1"><span class="block text-[10px] text-green-400 font-bold"><i class="fa-solid fa-bolt"></i> 24/7 ACTIVE</span><b class="text-[13px]">Live Support</b></span><span>›</span></a>
+</div>
+<a href="#" class="block mt-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl py-3 font-bold text-[14px]"><i class="fa-brands fa-telegram"></i> Join Official Channel</a>
+<a href="dashboard.html" class="block mt-3 text-[12px] text-slate-400">← Back to Dashboard</a>
+</div></div>
+<div class="bottomnav">
+<a href="add-fund.html" class="navitem"><i class="fa-solid fa-wallet text-[18px]"></i>Add Fund</a>
+<a href="all-order.html" class="navitem"><i class="fa-solid fa-list text-[18px]"></i>All Order</a>
+<a href="dashboard.html" class="navitem"><div class="store-fab"><i class="fa-solid fa-house"></i></div>Store</a>
+<a href="update.html" class="navitem"><i class="fa-solid fa-cloud text-[18px]"></i>Update</a>
+<a href="helpline.html" class="navitem active"><i class="fa-solid fa-headset text-[18px]"></i>Helpline</a>
+<a href="profile.html" class="navitem"><i class="fa-solid fa-user text-[18px]"></i>Profile</a>
+</div></div>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="user.js"></script>
+<script>needAuth(()=>paintWallets());</script></body></html>

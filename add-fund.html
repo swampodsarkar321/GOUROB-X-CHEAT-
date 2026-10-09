@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Add Fund | GOUROB X CHEAT</title><link rel="icon" type="image/jpeg" href="IMG-20260805-WA0005.jpg"><script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>body{background:#020409;color:#e8eef7}.app{max-width:430px;margin:0 auto;min-height:100vh;background:#070c1a;padding-bottom:115px}.topbar{position:sticky;top:0;z-index:50;background:rgba(7,12,26,.92);border-bottom:1px solid rgba(255,255,255,.07)}.glass{background:rgba(16,24,45,.85);border:1px solid rgba(255,255,255,.08);border-radius:16px}.wallet{background:rgba(0,255,150,.1);border:1px solid rgba(0,255,150,.35);color:#00ffa3}.amt{font-size:13px;font-weight:800;padding:10px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)}.amt.active{background:rgba(0,240,255,.15);border-color:#00f0ff;color:#00f0ff}.method{flex:1;padding:12px;border-radius:12px;font-size:12px;font-weight:800;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)}.method.active{border-color:#ff0080;background:rgba(255,0,128,.12);color:#ff9ac4}.field{width:100%;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px;font-size:13px;color:#fff;outline:none}.field:focus{border-color:#00f0ff}.bottomnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:rgba(8,13,28,.96);border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-around;align-items:end;padding:8px 4px 14px;z-index:60}.navitem{display:flex;flex-direction:column;align-items:center;font-size:10px;color:#8a96b0;gap:3px;min-width:52px;text-decoration:none}.navitem.active{color:#00f0ff}.store-fab{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#00c6ff,#0072ff);display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;margin-top:-28px;border:4px solid #070c1a}</style></head>
+<body><div class="app">
+<div class="topbar px-3 py-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2"><img src="IMG-20260805-WA0005.jpg" alt="GOUROB X CHEAT" class="w-9 h-9 rounded-full object-cover border border-red-500/60"><div class="text-[13px] font-extrabold tracking-wide">GOUROB <span class="text-red-500">X</span> CHEAT</div></div>
+<a href="add-fund.html" class="wallet text-[12px] font-bold px-3 py-1.5 rounded-full">৳ <span class="wallet-amt">0.00</span> +</a></div>
+
+<div class="px-3 mt-4 space-y-3">
+<h1 class="text-center font-extrabold">💰 Add Fund</h1>
+<p class="text-center text-[11px] text-slate-400">Balance: ৳ <span class="wallet-amt text-green-300 font-bold">0.00</span> • Request পাঠাও, admin approve করলে balance যোগ হবে</p>
+
+<div class="glass p-4">
+<p class="text-[11px] font-bold text-slate-400 mb-2">SELECT AMOUNT</p>
+<div class="grid grid-cols-2 gap-2.5" id="amts">
+<button class="amt text-[15px] py-3.5" data-v="100">৳100</button>
+<button class="amt active text-[15px] py-3.5" data-v="200">৳200</button>
+<button class="amt text-[15px] py-3.5" data-v="500">৳500</button>
+<button class="amt text-[15px] py-3.5" data-v="1000">৳1000</button>
+</div>
+<input id="amount" type="number" class="field mt-2.5" value="200" min="10">
+</div>
+
+<div class="glass p-4">
+<p class="text-[11px] font-bold text-slate-400 mb-2">PAYMENT METHOD</p>
+<div class="flex gap-2">
+<button class="method active" data-m="bKash">bKash</button>
+<button class="method" data-m="Nagad">Nagad</button>
+<button class="method" data-m="Rocket">Rocket</button>
+</div>
+<div class="mt-3 text-[12px] bg-black/40 border border-pink-500/30 rounded-xl p-3">Send Money to: <b id="paynum" class="text-pink-300">01XXXXXXXXX (Demo)</b> <button onclick="navigator.clipboard&&navigator.clipboard.writeText('01XXXXXXXXX')" class="ml-2 text-[11px] bg-white/10 px-2 py-1 rounded">Copy</button></div>
+<input id="txn" class="field mt-2" placeholder="Transaction ID (TrxID) লিখুন">
+</div>
+
+<button onclick="submitFund()" class="w-full py-3.5 rounded-2xl font-extrabold bg-gradient-to-r from-green-400 to-emerald-500 text-black">SUBMIT DEPOSIT ✅</button>
+<div id="msg" class="text-center text-[12px]"></div>
+
+<div class="glass p-4">
+<h3 class="text-[12px] font-bold mb-2">My Requests</h3>
+<div id="hist" class="text-[11px] text-slate-400 space-y-1"></div>
+</div>
+</div>
+
+<div class="bottomnav">
+<a href="add-fund.html" class="navitem active"><i class="fa-solid fa-wallet text-[18px]"></i>Add Fund</a>
+<a href="all-order.html" class="navitem"><i class="fa-solid fa-list text-[18px]"></i>All Order</a>
+<a href="dashboard.html" class="navitem"><div class="store-fab"><i class="fa-solid fa-house"></i></div>Store</a>
+<a href="update.html" class="navitem"><i class="fa-solid fa-cloud text-[18px]"></i>Update</a>
+<a href="helpline.html" class="navitem"><i class="fa-solid fa-headset text-[18px]"></i>Helpline</a>
+<a href="profile.html" class="navitem"><i class="fa-solid fa-user text-[18px]"></i>Profile</a>
+</div></div>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="user.js"></script>
+<script>
+let selAmt=200, selM='bKash', me=null;
+document.querySelectorAll('#amts .amt').forEach(b=>b.onclick=()=>{document.querySelectorAll('#amts .amt').forEach(x=>x.classList.remove('active'));b.classList.add('active');selAmt=b.dataset.v;document.getElementById('amount').value=selAmt});
+document.getElementById('amount').oninput=e=>selAmt=e.target.value;
+document.querySelectorAll('.method').forEach(b=>b.onclick=()=>{document.querySelectorAll('.method').forEach(x=>x.classList.remove('active'));b.classList.add('active');selM=b.dataset.m});
+needAuth(u=>{ me=u; paintWallets(); loadMine(); });
+function badge(s){ return s==='approved'?' <span class="text-green-400">Approved ✅</span>':s==='rejected'?' <span class="text-red-400">Rejected ❌</span>':' <span class="text-yellow-300">Pending ⏳</span>'; }
+function loadMine(){
+ fbDB().ref('fundRequests').orderByChild('uid').equalTo(me.uid).limitToLast(10).on('value',s=>{
+  const v=s.val(); const box=document.getElementById('hist');
+  if(!v){box.innerHTML='No requests yet.';return}
+  box.innerHTML=Object.values(v).reverse().map(x=>`<div>• ৳${x.amount} via ${x.method} — ${x.txn}${badge(x.status)}</div>`).join('');
+ });
+}
+async function submitFund(){
+ const a=parseFloat(document.getElementById('amount').value||selAmt);
+ const t=document.getElementById('txn').value.trim();
+ const m=document.getElementById('msg');
+ if(!a||a<10){m.innerHTML='<span class="text-red-400">Minimum ৳10 দিন</span>';return}
+ if(!t){m.innerHTML='<span class="text-red-400">TrxID দিন</span>';return}
+ m.textContent='Sending…';
+ try{
+  await fbDB().ref('fundRequests').push({uid:me.uid,email:me.email,amount:a,method:selM,txn:t,status:'pending',time:Date.now()});
+  document.getElementById('txn').value='';
+  m.innerHTML='<span class="text-green-400">⏳ Request পাঠানো হয়েছে! Admin approve করলে balance যোগ হবে।</span>';
+ }catch(e){ m.innerHTML='<span class="text-red-400">Fail: '+e.message+'</span>'; }
+}
+</script></body></html>
