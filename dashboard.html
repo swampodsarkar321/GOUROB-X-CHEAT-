@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>GOUROB X CHEAT | Store</title><link rel="icon" type="image/jpeg" href="IMG-20260805-WA0005.jpg">
+<meta name="theme-color" content="#04060a">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.json">
+<script src="pwa.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <style>
@@ -74,6 +78,12 @@ background-image:radial-gradient(circle at 20% 0%,rgba(0,240,255,.08),transparen
 </div>
 
 <!-- BOTTOM NAV -->
+<div id="pwaBar" style="display:none" class="fixed bottom-[92px] left-1/2 -translate-x-1/2 w-[92%] max-w-[400px] z-[70] glass rounded-2xl p-3 items-center gap-3">
+<img src="icon-192.png" class="w-11 h-11 rounded-xl" alt="app">
+<div class="flex-1 text-[12px]"><b>Install App</b><br><span class="text-slate-400">Add GOUROB X CHEAT to home screen</span></div>
+<button onclick="pwaInstall()" class="bg-cyan-400 text-black text-[12px] font-bold px-4 py-2 rounded-xl">INSTALL</button>
+<button onclick="pwaDismiss()" class="text-slate-500 px-1"><i class="fa-solid fa-xmark"></i></button>
+</div>
 <div class="bottomnav">
 <a href="add-fund.html" class="navitem"><i class="fa-solid fa-wallet text-[18px]"></i>Add Fund</a>
 <a href="all-order.html" class="navitem"><i class="fa-solid fa-list text-[18px]"></i>All Order</a>
