@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
@@ -120,8 +120,8 @@ function draw(){
  if(!list.length){box.innerHTML='<div class="glass p-8 text-center text-[12px] text-slate-400"><i class="fa-solid fa-box-open text-3xl"></i><br>No products in this category.</div>';return}
  box.innerHTML=list.map(p=>{const on=(p.status||'online')==='online';return `<div class="pcard">
   <div class="flex justify-between p-2"><span class="badge ${on?'bg-green-500/20 text-green-300 border border-green-500/40':'bg-slate-500/20 text-slate-400 border border-white/20'}">${on?'<i class="fa-solid fa-circle text-[8px]"></i> ONLINE':'OFFLINE'}</span><span class="badge bg-orange-500 text-white"><i class="fa-solid fa-fire"></i> HOT</span></div>
-  <div class="thumb mx-2 rounded-xl overflow-hidden"><div class="thumb-bg"></div>
-   <div class="relative text-center px-3">${p.image?`<img src="${p.image}" alt="${p.name||''}" class="absolute inset-0 w-full h-full object-cover" onerror="this.remove()">`:''}<div class="relative"><div class="text-xl font-black italic text-white">${p.name||'Product'}</div>${p.note?`<div class="text-[10px] bg-black/60 inline-block px-2 py-0.5 rounded mt-1 text-yellow-200">${p.note}</div>`:''}</div></div></div>
+  <div class="thumb mx-2 rounded-xl overflow-hidden"><div class="thumb-bg"></div>${p.image?`<img src="${p.image}" alt="" class="absolute inset-0 w-full h-full object-cover" onerror="this.remove()"><div class="absolute inset-0 bg-black/45"></div>`:''}
+   <div class="relative text-center px-3"><div class="text-xl font-black italic text-white drop-shadow-lg">${p.name||'Product'}</div>${p.note?`<div class="text-[10px] bg-black/60 inline-block px-2 py-0.5 rounded mt-1 text-yellow-200">${p.note}</div>`:''}</div></div>
   <div class="px-3 py-3 flex items-center justify-between">
    <div><div class="text-[13px] font-bold">${p.name||''}</div><div class="text-[10px] text-slate-400">${(CATS[p.cat]||{}).name||p.cat||''} • ${p.packages?p.packages.length+' plans':''}</div><div class="text-cyan-300 font-extrabold">from ৳${minPrice(p)}</div></div>
    <a href="view.html?id=${p.id}" class="bg-cyan-400 text-black text-[12px] font-bold px-4 py-2 rounded-xl"><i class="fa-solid fa-key"></i> VIEW</a>
