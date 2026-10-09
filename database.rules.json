@@ -40,7 +40,7 @@
     "wallets": {
       "$w": {
         ".read": "$w === auth.uid || (auth != null && (auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com'))",
-        ".write": "auth != null && (auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com')"
+        ".write": "(auth != null && (auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com')) || ($w === auth.uid && newData.val() <= data.val())"
       }
     },
     "users": {
