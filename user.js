@@ -4,8 +4,13 @@ function needAuth(next) {
   firebase.auth().onAuthStateChanged(async u => {
     if (!u) { location.href = 'login.html'; return; }
     try {
-      const s = await fbDB().ref('users/' + u.uid + '/banned').once('value');
-      if (s.val() === true) { location.href = 'banned.html'; return; }
+      const ref = fbDB().ref('users/' + u.uid);
+      const s = await ref.once('value');
+      const v = s.val();
+      if (v && v.banned === true) { location.href = 'banned.html'; return; }
+      if (!s.exists()) {
+        await ref.set({name: u.displayName || '', email: u.email || '', phone: '', created: Date.now()});
+      }
     } catch (e) {}
     if (next) next(u);
   });
