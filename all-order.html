@@ -37,13 +37,19 @@ function loadOrders(){
   const v=s.val(); ALLO=v?Object.values(v).sort((a,b)=>b.time-a.time):[]; draw();
  },e=>{document.getElementById('olist').innerHTML='<div class="text-center text-red-400 text-[12px] mt-10">'+e.message+'</div>'});
 }
+function stBadge(s){
+ s=s||'pending';
+ if(s==='approved') return '<span class="text-green-300 text-[10px] font-bold"><i class="fa-solid fa-circle-check"></i> APPROVED</span>';
+ if(s==='rejected') return '<span class="text-red-400 text-[10px] font-bold"><i class="fa-solid fa-circle-xmark"></i> REJECTED</span>';
+ return '<span class="text-yellow-300 text-[10px] font-bold"><i class="fa-solid fa-clock"></i> PENDING</span>';
+}
 function draw(){
  const list=days?ALLO.filter(o=>Date.now()-o.time<days*864e5):ALLO;
  const box=document.getElementById('olist');
  document.getElementById('empty').style.display=list.length?'none':'block';
  box.innerHTML=list.map(o=>`<div class="glass rounded-xl p-3 text-[12px]">
-  <div class="flex justify-between items-center"><b>${o.product||''}</b><span class="text-green-300 text-[10px] font-bold">${o.status||''}</span></div>
-  <div class="text-slate-400 text-[11px] mt-1">${o.plan||''} × ${o.qty||1} • ৳${o.total||0} • ${o.time?new Date(o.time).toLocaleString():''}</div>
+  <div class="flex justify-between items-center"><b>${o.product||''}</b>${stBadge(o.status)}</div>
+  <div class="text-slate-400 text-[11px] mt-1">${o.plan||''} x ${o.qty||1} - ৳${o.total||0} - ${o.time?new Date(o.time).toLocaleString():''}</div>
  </div>`).join('');
 }
 </script></body></html>

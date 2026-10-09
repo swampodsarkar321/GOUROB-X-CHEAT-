@@ -88,9 +88,9 @@ async function buyNow(){
   let ok=false;
   await fbDB().ref('wallets/'+me.uid).transaction(b=>{b=parseFloat(b)||0;if(b<tot)return;ok=true;return b-tot});
   if(!ok){alert('Balance changed, please try again');return}
-  await fbDB().ref('orders').push({uid:me.uid,email:me.email,productId:id,product:P.name,plan:P.packages[selPkg].label,unit:pr,qty:selQty,total:tot,status:'delivered',time:Date.now()});
+  await fbDB().ref('orders').push({uid:me.uid,email:me.email,productId:id,product:P.name,plan:P.packages[selPkg].label,unit:pr,qty:selQty,total:tot,status:'pending',time:Date.now()});
   await fbDB().ref('feed').push({product:P.name,plan:P.packages[selPkg].label,qty:selQty,time:Date.now()}).catch(()=>{});
-  alert('Purchase successful! Check your order history.');
+  alert('Order placed! Status: Pending approval. Check All Order.');
   location.href='all-order.html';
  }catch(e){alert('Fail: '+e.message)}
 }
