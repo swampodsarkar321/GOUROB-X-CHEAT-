@@ -6,19 +6,19 @@
 <body><div class="app">
 <div class="topbar px-3 py-2.5 flex items-center justify-between">
 <div class="flex items-center gap-2"><img src="IMG-20260805-WA0005.jpg" alt="GOUROB X CHEAT" class="w-9 h-9 rounded-full object-cover border border-red-500/60"><div class="text-[13px] font-extrabold tracking-wide">GOUROB <span class="text-red-500">X</span> CHEAT</div></div>
-<a href="add-fund.html" class="wallet text-[12px] font-bold px-3 py-1.5 rounded-full">à§³ <span class="wallet-amt">0.00</span> +</a></div>
+<a href="add-fund.html" class="wallet text-[12px] font-bold px-3 py-1.5 rounded-full">৳ <span class="wallet-amt">0.00</span> +</a></div>
 
 <div class="px-3 mt-4 space-y-3">
 <h1 class="text-center font-extrabold"><i class="fa-solid fa-sack-dollar text-green-300"></i> Add Fund</h1>
-<p class="text-center text-[11px] text-slate-400">Balance: à§³ <span class="wallet-amt text-green-300 font-bold">0.00</span> â€¢ Send a request, balance is added after admin approval</p>
+<p class="text-center text-[11px] text-slate-400">Balance: ৳ <span class="wallet-amt text-green-300 font-bold">0.00</span> • Send a request, balance is added after admin approval</p>
 
 <div class="glass p-4">
 <p class="text-[11px] font-bold text-slate-400 mb-2">SELECT AMOUNT</p>
 <div class="grid grid-cols-2 gap-2.5" id="amts">
-<button class="amt text-[15px] py-3.5" data-v="100">à§³100</button>
-<button class="amt active text-[15px] py-3.5" data-v="200">à§³200</button>
-<button class="amt text-[15px] py-3.5" data-v="500">à§³500</button>
-<button class="amt text-[15px] py-3.5" data-v="1000">à§³1000</button>
+<button class="amt text-[15px] py-3.5" data-v="100">৳100</button>
+<button class="amt active text-[15px] py-3.5" data-v="200">৳200</button>
+<button class="amt text-[15px] py-3.5" data-v="500">৳500</button>
+<button class="amt text-[15px] py-3.5" data-v="1000">৳1000</button>
 </div>
 <input id="amount" type="number" class="field mt-2.5" value="200" min="10">
 </div>
@@ -65,16 +65,16 @@ function loadMine(){
  fbDB().ref('fundRequests').orderByChild('uid').equalTo(me.uid).limitToLast(10).on('value',s=>{
   const v=s.val(); const box=document.getElementById('hist');
   if(!v){box.innerHTML='No requests yet.';return}
-  box.innerHTML=Object.values(v).reverse().map(x=>`<div>â€¢ à§³${x.amount} via ${x.method} â€” ${x.txn}${badge(x.status)}</div>`).join('');
+  box.innerHTML=Object.values(v).reverse().map(x=>`<div>• ৳${x.amount} via ${x.method} — ${x.txn}${badge(x.status)}</div>`).join('');
  });
 }
 async function submitFund(){
  const a=parseFloat(document.getElementById('amount').value||selAmt);
  const t=document.getElementById('txn').value.trim();
  const m=document.getElementById('msg');
- if(!a||a<10){m.innerHTML='<span class="text-red-400">Minimum à§³10 required</span>';return}
+ if(!a||a<10){m.innerHTML='<span class="text-red-400">Minimum ৳10 required</span>';return}
  if(!t){m.innerHTML='<span class="text-red-400">Enter TrxID</span>';return}
- m.textContent='Sendingâ€¦';
+ m.textContent='Sending…';
  try{
   await fbDB().ref('fundRequests').push({uid:me.uid,email:me.email,amount:a,method:selM,txn:t,status:'pending',time:Date.now()});
   document.getElementById('txn').value='';

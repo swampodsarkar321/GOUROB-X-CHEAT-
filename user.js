@@ -1,4 +1,4 @@
-// Shared user helper — real Firebase Auth + wallet. No dummy data.
+﻿// Shared user helper — real Firebase Auth + wallet. No dummy data.
 // Pages must load: firebase-app-compat, firebase-auth-compat, firebase-database-compat, firebase-config.js, then this.
 function needAuth(next) {
   firebase.auth().onAuthStateChanged(u => {
