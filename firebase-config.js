@@ -1,7 +1,9 @@
-// Firebase Realtime DB config
+﻿// Firebase Realtime DB config
 // WARNING: apiKey is public in the browser, so set admin-only write rules
 // in Firebase Console > Realtime Database > Rules (see database.rules.json).
 const firebaseConfig = {
+  imgbbKey: "22ecb01c424e02cc3812fd0b79c0a893",
+  bkashNumber: "01608822677",
   apiKey: "AIzaSyA8JtqgrJkY67gxsps569gQjf9Mb1uecF8",
   authDomain: "stikex-aeef1.firebaseapp.com",
   databaseURL: "https://stikex-aeef1-default-rtdb.asia-southeast1.firebasedatabase.app",
@@ -21,3 +23,4 @@ function fbGet(path){ return fbDB().ref(path).once('value').then(s=>s.val()); }
 /* --- Realtime Database Rules: use database.rules.json (paste in Console) ---
 Admin writes require Firebase Auth (Email login) via admin.html.
 */
+
