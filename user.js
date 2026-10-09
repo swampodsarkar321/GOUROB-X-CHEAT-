@@ -1,9 +1,13 @@
 ﻿// Shared user helper — real Firebase Auth + wallet. No dummy data.
 // Pages must load: firebase-app-compat, firebase-auth-compat, firebase-database-compat, firebase-config.js, then this.
 function needAuth(next) {
-  firebase.auth().onAuthStateChanged(u => {
-    if (!u) location.href = 'login.html';
-    else if (next) next(u);
+  firebase.auth().onAuthStateChanged(async u => {
+    if (!u) { location.href = 'login.html'; return; }
+    try {
+      const s = await fbDB().ref('users/' + u.uid + '/banned').once('value');
+      if (s.val() === true) { location.href = 'banned.html'; return; }
+    } catch (e) {}
+    if (next) next(u);
   });
 }
 function paintWallets(map) {

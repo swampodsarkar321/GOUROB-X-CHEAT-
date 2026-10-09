@@ -26,7 +26,7 @@
       ".indexOn": ["uid", "time"],
       "$o": {
         ".read": "auth != null && (data.child('uid').val() === auth.uid || auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com')",
-        ".write": "(!data.exists() && auth != null && newData.child('uid').val() === auth.uid) || (auth != null && (auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com'))"
+        ".write": "(!data.exists() && auth != null && newData.child('uid').val() === auth.uid && root.child('users/'+auth.uid+'/banned').val() !== true) || (auth != null && (auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com'))"
       }
     },
     "fundRequests": {
@@ -34,16 +34,17 @@
       ".indexOn": ["status", "time", "uid"],
       "$req": {
         ".read": "auth != null && (data.child('uid').val() === auth.uid || auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com')",
-        ".write": "(!data.exists() && auth != null && newData.child('uid').val() === auth.uid) || (auth != null && (auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com'))"
+        ".write": "(!data.exists() && auth != null && newData.child('uid').val() === auth.uid && root.child('users/'+auth.uid+'/banned').val() !== true) || (auth != null && (auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com'))"
       }
     },
     "wallets": {
       "$w": {
         ".read": "$w === auth.uid || (auth != null && (auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com'))",
-        ".write": "(auth != null && (auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com')) || ($w === auth.uid && newData.val() <= data.val())"
+        ".write": "(auth != null && (auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com')) || ($w === auth.uid && newData.val() <= data.val() && root.child('users/'+auth.uid+'/banned').val() !== true)"
       }
     },
     "users": {
+      ".read": "auth != null && (auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com')",
       "$uid": {
         ".read": "$uid === auth.uid || (auth != null && (auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com'))",
         ".write": "$uid === auth.uid || (auth != null && (auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com'))"
