@@ -16,11 +16,25 @@
 <h1 class="font-extrabold text-cyan-300 tracking-widest mt-3">SUPPORT CENTER</h1>
 <p class="text-[11px] text-slate-400">Contact our team for 24/7 premium help</p>
 <div class="space-y-2.5 mt-5 text-left">
-<a href="https://wa.me/8801344649889?text=Hello%2C%20I%20need%20support" target="_blank" rel="noopener" class="row p-3 flex items-center gap-3"><span class="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center"><i class="fa-solid fa-crown text-yellow-400"></i></span><span class="flex-1"><span class="block text-[10px] text-yellow-400 font-bold">OFFICIAL ADMIN</span><b class="text-[13px]">Contact Admin</b><span class="block text-[11px] text-green-300 font-bold"><i class="fa-brands fa-whatsapp"></i> 01344649889 - tap to chat</span></span><span>›</span></a>
+<button onclick="document.getElementById('contactModal').style.display='flex'" class="row p-3 flex items-center gap-3 w-full text-left"><span class="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center"><i class="fa-solid fa-crown text-yellow-400"></i></span><span class="flex-1"><span class="block text-[10px] text-yellow-400 font-bold">OFFICIAL ADMIN</span><b class="text-[13px]">Contact Admin</b><span class="block text-[11px] text-slate-400">WhatsApp - Telegram - Discord - More</span></span><span>›</span></button>
 </div>
 <a href="#" class="block mt-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl py-3 font-bold text-[14px]"><i class="fa-brands fa-telegram"></i> Join Official Channel</a>
 <a href="dashboard.html" class="block mt-3 text-[12px] text-slate-400">← Back to Dashboard</a>
 </div></div>
+<div id="contactModal" style="display:none" class="fixed inset-0 z-[80] bg-black/70 items-center justify-center p-4" onclick="if(event.target===this)this.style.display='none'">
+<div class="w-full max-w-[360px] rounded-2xl p-5" style="background:rgba(12,19,38,.97);border:1px solid rgba(0,240,255,.25)">
+<h2 class="font-extrabold text-center tracking-widest text-cyan-300">CONNECT WITH ADMIN</h2>
+<p class="text-center text-[11px] text-slate-400 mb-4">Tap any option to open</p>
+<div class="space-y-2">
+<a href="https://wa.me/8801344649889?text=Hello%2C%20I%20need%20support" target="_blank" rel="noopener" class="row p-3 flex items-center gap-3"><span class="w-10 h-10 rounded-xl bg-green-500/20 flex items-center justify-center"><i class="fa-brands fa-whatsapp text-green-300 text-xl"></i></span><span class="flex-1 text-left"><b class="text-[13px]">WhatsApp</b><span class="block text-[11px] text-slate-400">01344649889</span></span><span>›</span></a>
+<a href="https://t.me/gourobxcheat99" target="_blank" rel="noopener" class="row p-3 flex items-center gap-3"><span class="w-10 h-10 rounded-xl bg-sky-500/20 flex items-center justify-center"><i class="fa-brands fa-telegram text-sky-300 text-xl"></i></span><span class="flex-1 text-left"><b class="text-[13px]">Telegram</b><span class="block text-[11px] text-slate-400">@gourobxcheat99</span></span><span>›</span></a>
+<div class="row p-3 flex items-center gap-3"><span class="w-10 h-10 rounded-xl bg-indigo-500/20 flex items-center justify-center"><i class="fa-brands fa-discord text-indigo-300 text-xl"></i></span><span class="flex-1 text-left"><b class="text-[13px]">Discord</b><span class="block text-[11px] text-slate-400">gourobsarkar99</span></span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('gourobsarkar99');this.textContent='Copied!'" class="text-[11px] bg-white/10 border border-white/15 px-3 py-1.5 rounded-lg">Copy</button></div>
+<a href="https://www.facebook.com/share/1E45Q1kVjk/" target="_blank" rel="noopener" class="row p-3 flex items-center gap-3"><span class="w-10 h-10 rounded-xl bg-blue-600/20 flex items-center justify-center"><i class="fa-brands fa-facebook text-blue-400 text-xl"></i></span><span class="flex-1 text-left"><b class="text-[13px]">Facebook</b><span class="block text-[11px] text-slate-400">Follow our page</span></span><span>›</span></a>
+<a href="https://www.tiktok.com/@gecommunity" target="_blank" rel="noopener" class="row p-3 flex items-center gap-3"><span class="w-10 h-10 rounded-xl bg-pink-500/20 flex items-center justify-center"><i class="fa-brands fa-tiktok text-pink-300 text-xl"></i></span><span class="flex-1 text-left"><b class="text-[13px]">TikTok</b><span class="block text-[11px] text-slate-400">@gecommunity</span></span><span>›</span></a>
+</div>
+<button onclick="document.getElementById('contactModal').style.display='none'" class="w-full mt-4 py-2.5 rounded-xl bg-white/10 border border-white/15 text-[13px] font-bold">Close</button>
+</div>
+</div>
 <div class="bottomnav">
 <a href="add-fund.html" class="navitem"><i class="fa-solid fa-wallet text-[18px]"></i>Add Fund</a>
 <a href="all-order.html" class="navitem"><i class="fa-solid fa-list text-[18px]"></i>All Order</a>
