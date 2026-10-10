@@ -4,14 +4,14 @@
 const firebaseConfig = {
   imgbbKey: "22ecb01c424e02cc3812fd0b79c0a893",
   bkashNumber: "01608822677",
-  apiKey: "AIzaSyA8JtqgrJkY67gxsps569gQjf9Mb1uecF8",
-  authDomain: "stikex-aeef1.firebaseapp.com",
-  databaseURL: "https://stikex-aeef1-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "stikex-aeef1",
-  storageBucket: "stikex-aeef1.firebasestorage.app",
-  messagingSenderId: "102340803215",
-  appId: "1:102340803215:web:7de28ed037e4ee75e24efa",
-  measurementId: "G-WXQNJQ58K5"
+  apiKey: "AIzaSyAplkHSphSkF656LmImRZSthhi37JY0lYk",
+  authDomain: "strikex-54372.firebaseapp.com",
+  databaseURL: "https://strikex-54372-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "strikex-54372",
+  storageBucket: "strikex-54372.firebasestorage.app",
+  messagingSenderId: "640658293319",
+  appId: "1:640658293319:web:6598bfb23cf9d3b58f2762",
+  measurementId: "G-RHP6LD9YR0"
 };
 // Init (compat SDK loads on each page)
 try {
@@ -23,4 +23,3 @@ function fbGet(path){ return fbDB().ref(path).once('value').then(s=>s.val()); }
 /* --- Realtime Database Rules: use database.rules.json (paste in Console) ---
 Admin writes require Firebase Auth (Email login) via admin.html.
 */
-
