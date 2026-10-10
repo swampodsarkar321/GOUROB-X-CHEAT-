@@ -66,10 +66,10 @@ document.querySelectorAll('.method').forEach(b=>b.onclick=()=>{document.querySel
 needAuth(u=>{ me=u; paintWallets(); loadMine(); });
 function badge(s){ return s==='approved'?' <span class="text-green-400"><i class="fa-solid fa-circle-check"></i> Approved</span>':s==='rejected'?' <span class="text-red-400"><i class="fa-solid fa-circle-xmark"></i> Rejected</span>':' <span class="text-yellow-300"><i class="fa-solid fa-clock"></i> Pending</span>'; }
 function loadMine(){
- fbDB().ref('fundRequests').orderByChild('uid').equalTo(me.uid).limitToLast(10).on('value',s=>{
+ fbDB().ref('userFunds/'+me.uid).on('value',s=>{
   const v=s.val(); const box=document.getElementById('hist');
   if(!v){box.innerHTML='No requests yet.';return}
-  box.innerHTML=Object.values(v).reverse().map(x=>`<div>• ৳${x.amount} via ${x.method} — ${x.txn}${badge(x.status)}</div>`).join('');
+  box.innerHTML=Object.values(v).sort((a,b)=>b.time-a.time).slice(0,10).map(x=>`<div>• ৳${x.amount} via ${x.method} — ${x.txn}${badge(x.status)}</div>`).join('');
  });
 }
 async function submitFund(){
@@ -80,7 +80,10 @@ async function submitFund(){
  if(!t){m.innerHTML='<span class="text-red-400">Enter TrxID</span>';return}
  m.textContent='Sending…';
  try{
-  await fbDB().ref('fundRequests').push({uid:me.uid,email:me.email,amount:a,method:selM,txn:t,status:'pending',time:Date.now()});
+  const fr={uid:me.uid,email:me.email,amount:a,method:selM,txn:t,status:'pending',time:Date.now()};
+  const fk=fbDB().ref('fundRequests').push().key;
+  await fbDB().ref('fundRequests/'+fk).set(fr);
+  await fbDB().ref('userFunds/'+me.uid+'/'+fk).set(fr);
   document.getElementById('txn').value='';
   m.innerHTML='<span class="text-green-400"><i class="fa-solid fa-clock"></i> Request sent! Balance will be added after admin approval.</span>';
  }catch(e){ m.innerHTML='<span class="text-red-400">Fail: '+e.message+'</span>'; }

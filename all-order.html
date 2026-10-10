@@ -37,7 +37,7 @@ let ALLO=[], days=0, me=null;
 needAuth(u=>{me=u;paintWallets();loadOrders()});
 document.querySelectorAll('#times .time').forEach(b=>b.onclick=()=>{document.querySelectorAll('#times .time').forEach(x=>x.classList.remove('active'));b.classList.add('active');days=parseInt(b.dataset.d);draw()});
 function loadOrders(){
- fbDB().ref('orders').orderByChild('uid').equalTo(me.uid).on('value',s=>{
+ fbDB().ref('userOrders/'+me.uid).on('value',s=>{
   const v=s.val(); ALLO=v?Object.values(v).sort((a,b)=>b.time-a.time):[]; draw();
  },e=>{document.getElementById('olist').innerHTML='<div class="text-center text-red-400 text-[12px] mt-10">'+e.message+'</div>'});
 }

@@ -37,6 +37,22 @@
         ".write": "(!data.exists() && auth != null && newData.child('uid').val() === auth.uid && root.child('users/'+auth.uid+'/banned').val() !== true) || (auth != null && (auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com'))"
       }
     },
+    "userOrders": {
+      "$uid": {
+        ".read": "$uid === auth.uid || (auth != null && (auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com'))",
+        "$m": {
+          ".write": "((!data.exists()) && auth != null && $uid === auth.uid && newData.child('uid').val() === auth.uid && newData.child('status').val() === 'pending' && root.child('users/'+auth.uid+'/banned').val() !== true) || (data.exists() && auth != null && (auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com'))"
+        }
+      }
+    },
+    "userFunds": {
+      "$uid": {
+        ".read": "$uid === auth.uid || (auth != null && (auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com'))",
+        "$m": {
+          ".write": "((!data.exists()) && auth != null && $uid === auth.uid && newData.child('uid').val() === auth.uid && newData.child('status').val() === 'pending' && root.child('users/'+auth.uid+'/banned').val() !== true) || (data.exists() && auth != null && (auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com'))"
+        }
+      }
+    },
     "wallets": {
       "$w": {
         ".read": "$w === auth.uid || (auth != null && (auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com'))",
