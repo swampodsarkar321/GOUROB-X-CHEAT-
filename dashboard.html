@@ -66,7 +66,7 @@ background-image:radial-gradient(circle at 20% 0%,rgba(0,240,255,.08),transparen
 
 <!-- Recent -->
 <div class="glass rounded-xl px-2 py-2 flex items-center gap-2 text-[11px]">
-<span class="bg-cyan-400/20 text-cyan-300 border border-cyan-400/40 px-2 py-1 rounded-lg font-bold">STORE</span>
+<span class="bg-red-500/20 text-red-300 border border-red-500/40 px-2 py-1 rounded-lg font-bold"><span class="livedot w-2 h-2 rounded-full bg-red-500 inline-block"></span> LIVE</span>
 <span id="recent" class="marquee text-slate-300">Loading products…</span>
 </div>
 
@@ -102,10 +102,10 @@ background-image:radial-gradient(circle at 20% 0%,rgba(0,240,255,.08),transparen
 <script src="firebase-config.js"></script>
 <script src="user.js"></script>
 <script>
-let ALL=[], CATS={}, cur='all';
+let ALL=[], CATS={}, FEED=[], cur='all';
 needAuth(u=>{
  document.getElementById('uname').textContent=(u.displayName||u.email||'Profile').split('@')[0].slice(0,7);
- paintWallets(); loadCats(); loadProducts();
+ paintWallets(); loadCats(); loadProducts(); loadFeed(); setInterval(tick,3500);
 });
 function bindCats(){document.querySelectorAll('#cats .cat').forEach(b=>b.onclick=()=>{document.querySelectorAll('#cats .cat').forEach(x=>x.classList.remove('active'));b.classList.add('active');cur=b.dataset.f;draw()})}
 bindCats();
@@ -122,9 +122,22 @@ function loadProducts(){
  fbDB().ref('products').on('value',s=>{
   const v=s.val(); ALL=v?Object.entries(v).reverse().map(([id,p])=>({id,...p})):[];
   document.getElementById('liveCount').textContent=ALL.length+'+';
-  document.getElementById('recent').textContent=ALL.length?`${ALL.length} products live`:'No products yet — add them from the admin panel';
+  tick();
   loadCats(); draw();
  });
+}
+function loadFeed(){
+ fbDB().ref('feed').orderByChild('time').limitToLast(12).on('value',s=>{
+  const v=s.val(); FEED=v?Object.values(v).sort((a,b)=>b.time-a.time):[]; tick();
+ },()=>{tick()});
+}
+function tick(){
+ const el=document.getElementById('recent'); if(!el)return;
+ let items=[];
+ if(FEED.length) items=FEED.map(f=>`${f.product||'Product'} (${f.plan||''}) x ${f.qty||1} - just bought`);
+ else if(ALL.length) items=ALL.map(p=>`${p.name} - from Tk ${minPrice(p)} - HOT`);
+ if(!items.length){el.textContent='New products coming soon';return}
+ el.textContent=items[Math.floor(Math.random()*items.length)];
 }
 function minPrice(p){ if(p.packages&&p.packages.length) return Math.min(...p.packages.map(x=>x.price)); return p.price||0; }
 function draw(){
