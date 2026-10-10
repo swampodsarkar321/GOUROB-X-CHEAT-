@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>Update | GOUROB X CHEAT</title><link rel="icon" type="image/jpeg" href="IMG-20260805-WA0005.jpg">
 <meta name="theme-color" content="#04060a">
@@ -12,7 +12,7 @@
 <div class="flex items-center gap-2"><img src="IMG-20260805-WA0005.jpg" alt="GOUROB X CHEAT" class="w-9 h-9 rounded-full object-cover border border-red-500/60"><div class="text-[13px] font-extrabold tracking-wide">GOUROB <span class="text-red-500">X</span> CHEAT</div></div>
 <a href="add-fund.html" class="wallet text-[12px] font-bold px-3 py-1.5 rounded-full">৳ <span class="wallet-amt">0.00</span> +</a></div>
 <div class="px-3 mt-4 space-y-3">
-<div class="text-center"><h1 class="font-extrabold text-cyan-300 tracking-wide">UPDATE & SET UP</h1><p class="text-[11px] text-slate-400">Get the latest apps and setup guides (demo)</p></div>
+<div class="text-center"><h1 class="font-extrabold text-cyan-300 tracking-wide">LATEST UPDATES</h1><p class="text-[11px] text-slate-400">Download the latest files</p></div>
 <div id="uplist" class="space-y-3"><div class="skel" style="height:90px"></div><div class="skel" style="height:90px"></div></div>
 <p class="text-[10px] text-slate-500 text-center">Add your own legal app links from the admin panel.</p>
 </div>
@@ -34,7 +34,7 @@ needAuth(()=>{ paintWallets(); });
 document.querySelectorAll('.wallet-amt').forEach(e=>e.textContent='…');
 const fallback=[{title:'Demo Pack A – Android',note:'v1.0',link:''},{title:'Demo Pack V6',note:'v6.0',link:''}];
 function draw(list){
- document.getElementById('uplist').innerHTML=list.map(x=>`<div class="glass p-3"><div class="flex items-center gap-2 text-[13px] font-bold"><span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center"><i class="fa-solid fa-cloud-arrow-down text-cyan-300"></i></span> ${x.title||x.n}</div>${x.note?`<div class="text-[11px] text-slate-400 mt-1">${x.note}</div>`:''}<div class="flex gap-2 mt-2">${x.link?`<a href="${x.link}" target="_blank" rel="noopener" class="btn-dl flex-1 text-center"><i class="fa-solid fa-download"></i> DOWNLOAD</a>`:'<span class="btn-dl flex-1 text-center opacity-50"><i class="fa-solid fa-download"></i> DOWNLOAD</span>'}<span class="btn-setup flex-1 text-center"><i class="fa-solid fa-play"></i> SETUP</span></div></div>`).join('');
+ document.getElementById('uplist').innerHTML=list.map(x=>`<div class="glass p-3"><div class="flex items-center gap-2 text-[13px] font-bold"><span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center"><i class="fa-solid fa-cloud-arrow-down text-cyan-300"></i></span> ${x.title||x.n}</div>${x.note?`<div class="text-[11px] text-slate-400 mt-1">${x.note}</div>`:''}<div class="flex gap-2 mt-2">${x.link?`<a href="${x.link}" target="_blank" rel="noopener" class="btn-dl flex-1 text-center"><i class="fa-solid fa-download"></i> DOWNLOAD</a>`:'<span class="btn-dl flex-1 text-center opacity-50"><i class="fa-solid fa-download"></i> DOWNLOAD</span>'}</div></div>`).join('');
 }
 draw(fallback);
 try{ fbDB().ref('updates').on('value',s=>{ const v=s.val(); if(v) draw(Object.values(v).reverse()); }); }catch(e){}
