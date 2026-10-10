@@ -126,6 +126,9 @@ function loadProducts(){
   loadCats(); draw();
  });
 }
+const NM=['arif','rakib','sakib','tanvir','nahid','fahim','joy','hridoy','shanto','rifat','tamim','nasim','sabbir','emon','farhan','atik','maruf','tanim','jubair','akash','bappy','forhad','habib','imran','kawsar','limon','nayem','parvez'];
+function maskN(n){n=(''+n).toLowerCase().replace(/[^a-z]/g,'');if(n.length<2)return 'u*';if(n.length<=3)return n[0]+'*'+n.slice(-1);return n.slice(0,2)+'*'.repeat(n.length-3)+n.slice(-1)}
+function pickN(){return maskN(NM[Math.floor(Math.random()*NM.length)])}
 function loadFeed(){
  fbDB().ref('feed').orderByChild('time').limitToLast(12).on('value',s=>{
   const v=s.val(); FEED=v?Object.values(v).sort((a,b)=>b.time-a.time):[]; tick();
@@ -133,11 +136,10 @@ function loadFeed(){
 }
 function tick(){
  const el=document.getElementById('recent'); if(!el)return;
- let items=[];
- if(FEED.length) items=FEED.map(f=>`${f.product||'Product'} (${f.plan||''}) x ${f.qty||1} - just bought`);
- else if(ALL.length) items=ALL.map(p=>`${p.name} - from Tk ${minPrice(p)} - HOT`);
- if(!items.length){el.textContent='New products coming soon';return}
- el.textContent=items[Math.floor(Math.random()*items.length)];
+ const n=pickN();
+ if(FEED.length){const f=FEED[Math.floor(Math.random()*FEED.length)];el.textContent=n+' just bought '+(f.product||'Product')+' ('+(f.plan||'')+')';return}
+ if(ALL.length){const p=ALL[Math.floor(Math.random()*ALL.length)];el.textContent=n+' just bought '+(p.name||'Product');return}
+ el.textContent='New products coming soon';
 }
 function minPrice(p){ if(p.packages&&p.packages.length) return Math.min(...p.packages.map(x=>x.price)); return p.price||0; }
 function draw(){
