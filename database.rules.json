@@ -22,7 +22,7 @@
         ".validate": "newData.hasChildren(['product', 'time']) && !newData.hasChild('email') && !newData.hasChild('uid')"
       }
     },
-    "orders": {      ".read": "auth != null && (auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com')",
+    "orders": {      ".read": "auth != null && ((auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com') || (query.orderByChild === 'uid' && query.equalTo === auth.uid))",
       ".indexOn": ["uid", "time"],
       "$o": {
         ".read": "auth != null && (data.child('uid').val() === auth.uid || auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com')",
@@ -30,7 +30,7 @@
       }
     },
     "fundRequests": {
-      ".read": "auth != null && (auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com')",
+      ".read": "auth != null && ((auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com') || (query.orderByChild === 'uid' && query.equalTo === auth.uid))",
       ".indexOn": ["status", "time", "uid"],
       "$req": {
         ".read": "auth != null && (data.child('uid').val() === auth.uid || auth.token.email == 'gourobsarkar99@gmail.com' || auth.token.email == 'mdswampodsarkar@gmail.com')",
